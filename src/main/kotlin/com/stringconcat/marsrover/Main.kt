@@ -1,11 +1,11 @@
 import com.stringconcat.marsrover.Coordinate
 import com.stringconcat.marsrover.Direction
-import com.stringconcat.marsrover.Plateu
+import com.stringconcat.marsrover.Plateau
 import com.stringconcat.marsrover.Rover
 
 fun main(args: Array<String>) {
     val rover = Rover(Coordinate(0, 0), Direction.NORTH)
-    val mars = Plateu(width = 20, heigh = 20)
+    val mars = Plateau(width = 20, height = 20)
     mars.land(rover)
 
     rover.turnLeft()
