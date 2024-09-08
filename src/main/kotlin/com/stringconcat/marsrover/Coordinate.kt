@@ -4,7 +4,8 @@ data class Coordinate(
     val x: Int,
     val y: Int
 ) {
-    fun incY(): Coordinate {
-        return Coordinate(x, y + 1)
-    }
+    fun incY() = Coordinate(x, y.inc())
+    fun incX() = Coordinate(x.inc(), y)
+    fun decY() = Coordinate(x, y.dec())
+    fun decX() = Coordinate(x.dec(), y)
 }
