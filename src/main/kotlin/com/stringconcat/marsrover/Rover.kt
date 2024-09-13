@@ -4,21 +4,42 @@ class Rover(
     var coordinates: Coordinate,
     var direction: Direction
 ) {
-    fun turnLeft() {
-        TODO("Not yet implemented")
+    companion object {
+        fun northFaced(x: Int = 0, y:Int = 0) = Rover(Coordinate(x, y), Direction.NORTH)
+        fun southFaced(x: Int = 0, y:Int = 0) = Rover(Coordinate(x, y), Direction.SOUTH)
+        fun eastFaced(x: Int = 0, y:Int = 0) = Rover(Coordinate(x, y), Direction.EAST)
+        fun westFaced(x: Int = 0, y:Int = 0) = Rover(Coordinate(x, y), Direction.WEST)
     }
 
     fun move() {
         coordinates = when(direction) {
-            Direction.SOUTH -> Coordinate(coordinates.x, coordinates.y.dec())
+            Direction.SOUTH -> coordinates.decY()
             Direction.NORTH -> coordinates.incY()
-            Direction.WEST -> Coordinate(coordinates.x.dec(), coordinates.y)
-            Direction.EAST -> Coordinate(coordinates.x.inc(), coordinates.y)
+            Direction.WEST -> coordinates.decX()
+            Direction.EAST -> coordinates.incX()
         }
     }
 
-    fun turnRight() {
-        TODO("Not yet implemented")
+    fun turnLeft(times: Int = 1) {
+        for (i in 1..times) {
+            direction = when(direction) {
+                Direction.SOUTH -> Direction.EAST
+                Direction.NORTH -> Direction.WEST
+                Direction.WEST -> Direction.SOUTH
+                Direction.EAST -> Direction.NORTH
+            }
+        }
+    }
+
+    fun turnRight(times: Int = 1) {
+        for (i in 1..times) {
+            direction = when(direction) {
+                Direction.SOUTH -> Direction.WEST
+                Direction.NORTH -> Direction.EAST
+                Direction.WEST -> Direction.NORTH
+                Direction.EAST -> Direction.SOUTH
+            }
+        }
     }
 
     fun direction(): Direction {
