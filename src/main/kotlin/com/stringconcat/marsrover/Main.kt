@@ -6,7 +6,7 @@ import com.stringconcat.marsrover.Rover
 fun main(args: Array<String>) {
     val rover = Rover(Coordinate(0, 0), Direction.NORTH)
     val mars = Plateau(width = 20, height = 20)
-    mars.land(rover)
+    mars.land(rover.coordinates)
 
     rover.turnLeft()
     rover.move()

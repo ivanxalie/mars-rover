@@ -9,7 +9,7 @@ class RoverTest {
     fun `rover created - with initial coordinates`() {
         val rover = Rover.northFaced()
 
-        rover.coordinates shouldBe Coordinate(x = 0, y = 0)
+        rover.coordinates shouldBe Coordinate.zero()
         rover.direction shouldBe Direction.NORTH
     }
 
@@ -27,8 +27,8 @@ class RoverTest {
         val rover = Rover.southFaced(0, 1)
         rover.move()
 
-        rover.coordinates shouldBe Coordinate(0, 0)
-        rover.direction shouldBe  Direction.SOUTH
+        rover.coordinates shouldBe Coordinate.zero()
+        rover.direction shouldBe Direction.SOUTH
     }
 
     @Test
@@ -36,8 +36,8 @@ class RoverTest {
         val rover = Rover.westFaced(1, 0)
         rover.move()
 
-        rover.coordinates shouldBe Coordinate(0, 0)
-        rover.direction shouldBe  Direction.WEST
+        rover.coordinates shouldBe Coordinate.zero()
+        rover.direction shouldBe Direction.WEST
     }
 
     @Test
@@ -46,7 +46,7 @@ class RoverTest {
         rover.move()
 
         rover.coordinates shouldBe Coordinate(2, 0)
-        rover.direction shouldBe  Direction.EAST
+        rover.direction shouldBe Direction.EAST
     }
 
     @Test
