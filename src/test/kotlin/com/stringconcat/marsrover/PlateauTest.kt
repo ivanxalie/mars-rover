@@ -30,11 +30,15 @@ class PlateauTest {
 
     @Test
     fun `move right take new position on the right`() {
-        plateau.land(Coordinate.zero())
-        val moveResult = plateau.move(Coordinate.zero(), Coordinate.zero().incX())
+        val source = Coordinate.zero()
+        val destination = Coordinate.zero().incX()
 
-        plateau.containsCoordinate(Coordinate.zero().incX()) shouldBe true
-        plateau.containsCoordinate(Coordinate.zero()) shouldBe false
+        plateau.land(source)
+        val moveResult = plateau.move(source, destination)
+
+        plateau.containsCoordinate(destination) shouldBe true
+        plateau.containsCoordinate(source) shouldBe false
+        moveResult shouldBe destination
     }
 
     @Test
@@ -43,9 +47,12 @@ class PlateauTest {
         val destination = source.decX()
 
         plateau.land(source)
-        plateau.move(source, destination)
+        val moveResult = plateau.move(source, destination)
 
         plateau.containsCoordinate(destination) shouldBe true
         plateau.containsCoordinate(source) shouldBe false
+        moveResult shouldBe destination
     }
+
+
 }
