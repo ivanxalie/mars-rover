@@ -2,7 +2,8 @@ package com.stringconcat.marsrover
 
 class Rover(
     var coordinates: Coordinate,
-    var direction: Direction
+    var direction: Direction,
+    val surface: Surface = SphericalInVacuumSurface()
 ) {
     companion object {
         fun northFaced(x: Int = 0, y:Int = 0) = Rover(Coordinate(x, y), Direction.NORTH)
