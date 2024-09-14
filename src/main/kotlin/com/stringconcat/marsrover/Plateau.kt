@@ -11,7 +11,7 @@ class Plateau(val width: Int = 5, val height: Int = 5) {
     fun land(coordinate: Coordinate) {
         if (coordinate.x > width || coordinate.y > height)
             throw PositionOutsideBound(coordinate, width, height)
-        if (taken.contains(coordinate)) throw PositionAlreadyTaken(coordinate)
+        if (containsCoordinate(coordinate)) throw PositionAlreadyTaken(coordinate)
         taken.add(coordinate)
     }
 
@@ -21,9 +21,7 @@ class Plateau(val width: Int = 5, val height: Int = 5) {
         return next
     }
 
-    fun containsCoordinate(coordinate: Coordinate): Boolean {
-        return taken.contains(coordinate)
-    }
+    fun containsCoordinate(coordinate: Coordinate) = taken.contains(coordinate)
 
 
 }
