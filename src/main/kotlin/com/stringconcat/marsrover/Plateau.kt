@@ -15,10 +15,13 @@ class Plateau(val width: Int = 5, val height: Int = 5) {
         taken.add(coordinate)
     }
 
-    fun move(current: Coordinate, next: Coordinate): Coordinate {
-        taken.remove(current)
-        taken.add(next)
-        return next
+    fun move(source: Coordinate, destination: Coordinate): Coordinate {
+        return if (destination.x > width || destination.y > height) source
+        else {
+            taken.remove(source)
+            taken.add(destination)
+            return destination
+        }
     }
 
     fun containsCoordinate(coordinate: Coordinate) = taken.contains(coordinate)
