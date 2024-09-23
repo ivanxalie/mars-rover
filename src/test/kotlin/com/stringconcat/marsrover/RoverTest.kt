@@ -112,4 +112,6 @@ class RoverTest {
 
         rover.direction shouldBe Direction.NORTH
     }
+
+
 }
