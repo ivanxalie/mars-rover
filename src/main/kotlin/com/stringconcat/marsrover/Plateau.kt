@@ -16,7 +16,8 @@ class Plateau(val width: Int = 5, val height: Int = 5) : Surface {
     }
 
     override fun move(source: Coordinate, destination: Coordinate): Coordinate {
-        return if (destination.x > width || destination.y > height) source
+        return if (destination.x > width || destination.y > height
+            || taken.contains(destination)) source
         else {
             taken.remove(source)
             taken.add(destination)

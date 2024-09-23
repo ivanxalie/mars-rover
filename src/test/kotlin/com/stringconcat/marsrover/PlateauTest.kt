@@ -105,4 +105,20 @@ class PlateauTest {
         plateau.containsCoordinate(source) shouldBe true
         moveResult shouldBe source
     }
+
+    @Test
+    fun `move right on taken position should stay the same position`() {
+        val firstCoordinate = Coordinate(0, 0)
+        val secondCoordinate = Coordinate(1, 0)
+
+        plateau.land(firstCoordinate)
+        plateau.land(secondCoordinate)
+
+        val moveResult = plateau.move(firstCoordinate, secondCoordinate)
+
+        plateau.containsCoordinate(firstCoordinate) shouldBe true
+        plateau.containsCoordinate(secondCoordinate) shouldBe true
+
+        moveResult shouldBe firstCoordinate
+    }
 }
