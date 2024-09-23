@@ -1,10 +1,14 @@
 package com.stringconcat.marsrover
 
-class Rover(
+class Rover internal constructor(
     var coordinates: Coordinate,
     var direction: Direction,
     val surface: Surface = SphericalInVacuumSurface()
 ) {
+    init {
+        surface.land(coordinates)
+    }
+
     companion object {
         fun northFaced(x: Int = 0, y:Int = 0) = Rover(Coordinate(x, y), Direction.NORTH)
         fun southFaced(x: Int = 0, y:Int = 0) = Rover(Coordinate(x, y), Direction.SOUTH)
@@ -13,12 +17,17 @@ class Rover(
     }
 
     fun move() {
-        coordinates = when(direction) {
-            Direction.SOUTH -> coordinates.decY()
-            Direction.NORTH -> coordinates.incY()
-            Direction.WEST -> coordinates.decX()
-            Direction.EAST -> coordinates.incX()
-        }
+        val source = coordinates
+        try {
+            val destination = when (direction) {
+                Direction.SOUTH -> coordinates.decY()
+                Direction.NORTH -> coordinates.incY()
+                Direction.WEST -> coordinates.decX()
+                Direction.EAST -> coordinates.incX()
+            }
+            val moveResult = surface.move(source, destination)
+            coordinates = moveResult
+        } catch (ignore: Exception) {}
     }
 
     fun turnLeft(times: Int = 1) {
@@ -43,8 +52,5 @@ class Rover(
         }
     }
 
-    fun direction(): Direction {
-        TODO("Not yet implemented")
-    }
-
+    fun direction() = direction
 }
