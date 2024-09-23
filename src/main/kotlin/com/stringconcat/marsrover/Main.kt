@@ -1,5 +1,3 @@
-import com.stringconcat.marsrover.Coordinate
-import com.stringconcat.marsrover.Direction
 import com.stringconcat.marsrover.Plateau
 import com.stringconcat.marsrover.Rover
 
