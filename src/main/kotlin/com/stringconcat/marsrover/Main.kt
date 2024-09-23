@@ -4,9 +4,8 @@ import com.stringconcat.marsrover.Plateau
 import com.stringconcat.marsrover.Rover
 
 fun main(args: Array<String>) {
-    val rover = Rover.northFaced()
     val mars = Plateau(width = 20, height = 20)
-    mars.land(rover.coordinates)
+    val rover = Rover.northFaced(surface = mars)
 
     rover.turnLeft()
     rover.move()
