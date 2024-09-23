@@ -113,5 +113,35 @@ class RoverTest {
         rover.direction shouldBe Direction.NORTH
     }
 
+    @Test
+    fun `south faced rover on upper edge should respect boundaries`() {
+        val rover = Rover.southFaced(surface = Plateau())
+        rover.move()
 
+        rover.coordinates shouldBe Coordinate.zero()
+    }
+
+    @Test
+    fun `north faced rover on lower edge should respect boundaries`() {
+        val rover = Rover.northFaced(y = 5, surface = Plateau())
+        rover.move()
+
+        rover.coordinates shouldBe Coordinate(0, 5)
+    }
+
+    @Test
+    fun `east faced rover on right edge should respect boundaries`() {
+        val rover = Rover.eastFaced(x = 5, surface = Plateau())
+        rover.move()
+
+        rover.coordinates shouldBe Coordinate(5, 0)
+    }
+
+    @Test
+    fun `west faced rover on right edge should respect boundaries`() {
+        val rover = Rover.westFaced(surface = Plateau())
+        rover.move()
+
+        rover.coordinates shouldBe Coordinate.zero()
+    }
 }
