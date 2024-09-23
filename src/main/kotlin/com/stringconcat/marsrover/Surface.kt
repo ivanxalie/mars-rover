@@ -6,6 +6,10 @@ interface Surface {
     fun move(source: Coordinate, destination: Coordinate): Coordinate
 
     fun containsCoordinate(coordinate: Coordinate): Boolean
+
+    fun width() : Int = Int.MAX_VALUE
+
+    fun height(): Int = Int.MAX_VALUE
 }
 
 class PositionOutsideBound(coordinate: Coordinate, width: Int, height: Int) :

@@ -25,5 +25,9 @@ class Plateau(val width: Int = 5, val height: Int = 5) : Surface {
         }
     }
 
+    override fun width() = width
+
+    override fun height() = height
+
     override fun containsCoordinate(coordinate: Coordinate) = taken.contains(coordinate)
 }
