@@ -32,8 +32,8 @@ class Rover internal constructor(
                 Direction.WEST -> coordinates.decX()
                 Direction.EAST -> coordinates.incX()
             }
-            val moveResult = surface.move(source, destination)
-            coordinates = moveResult
+            val moveResult = surface?.move(source, destination)
+            coordinates = moveResult!!
         } catch (ignore: Exception) {
         }
     }

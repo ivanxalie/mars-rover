@@ -1,5 +1,6 @@
 package com.stringconcat.marsrover
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Test
@@ -25,5 +26,25 @@ class CommandExecutorTest {
         surface shouldNotBe null
         surface.width() shouldBe 4
         surface.height() shouldBe 4
+    }
+
+    @Test
+    fun `land rover on position 1 2`() {
+        executor.readCommand(" 4 4 ")
+        executor.readCommand("1 2 N")
+
+        val surface = executor.surface
+        val rover = executor.currentRover
+
+        surface shouldNotBe null
+        rover shouldNotBe null
+        surface.width() shouldBe 4
+        surface.height() shouldBe 4
+        surface.containsCoordinate(Coordinate(1, 2)) shouldBe true
+    }
+
+    @Test
+    fun `land on missing surface should fail`() {
+        shouldThrow<SurfaceNotInitializedException> { executor.readCommand("1 2 N") }
     }
 }
