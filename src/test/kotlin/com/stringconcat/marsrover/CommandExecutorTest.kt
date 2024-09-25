@@ -38,6 +38,7 @@ class CommandExecutorTest {
 
         surface shouldNotBe null
         rover shouldNotBe null
+        rover.direction shouldBe Direction.NORTH
         surface.width() shouldBe 4
         surface.height() shouldBe 4
         surface.containsCoordinate(Coordinate(1, 2)) shouldBe true
@@ -46,5 +47,29 @@ class CommandExecutorTest {
     @Test
     fun `land on missing surface should fail`() {
         shouldThrow<SurfaceNotInitializedException> { executor.readCommand("1 2 N") }
+    }
+
+    @Test
+    fun `land north faced rover than turn it left should have west direction`() {
+        executor.readCommand(" 4 4 ")
+        executor.readCommand("1 2 N")
+        executor.readCommand("L")
+
+        val rover = executor.currentRover
+
+        rover shouldNotBe null
+        rover.direction shouldBe Direction.WEST
+    }
+
+    @Test
+    fun `land north faced rover than turn it left then right should have north direction`() {
+        executor.readCommand(" 4 4 ")
+        executor.readCommand("1 2 N")
+        executor.readCommand("LR")
+
+        val rover = executor.currentRover
+
+        rover shouldNotBe null
+        rover.direction shouldBe Direction.NORTH
     }
 }

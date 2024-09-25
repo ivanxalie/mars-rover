@@ -5,6 +5,7 @@ class CommandExecutor {
     lateinit var surface: Surface
     private val surfaceRegex = Regex("""\d+\s+\d+""")
     private val startPositionRegex = Regex("""\d+\s+\d+\s+[NESW]""")
+    private val leftRightMoveRegex = Regex("""[LRM]+""")
 
     fun readCommand(command: String) {
         val trimmedCommand = command.trim()
@@ -13,6 +14,8 @@ class CommandExecutor {
             createSurface(trimmedCommand)
         else if (startPositionRegex.matches(trimmedCommand))
             landRover(trimmedCommand)
+        else if (leftRightMoveRegex.matches(trimmedCommand))
+            turnOrMove(trimmedCommand)
     }
 
     private fun createSurface(command: String) {
@@ -21,7 +24,7 @@ class CommandExecutor {
     }
 
     private fun landRover(command: String) {
-        if (!::surface.isInitialized) throw SurfaceNotInitializedException()
+        ensureSurfaceIsInitialized()
         val commandParts = command.split(" ")
         val x = commandParts[0].toInt()
         val y = commandParts[1].toInt()
@@ -33,6 +36,24 @@ class CommandExecutor {
             Direction.SOUTH -> Rover.southFaced(x, y, surface)
         }
     }
+
+    private fun ensureSurfaceIsInitialized() {
+        if (!::surface.isInitialized) throw SurfaceNotInitializedException()
+    }
+
+    private fun turnOrMove(command: String) {
+        ensureSurfaceIsInitialized()
+        if (!::currentRover.isInitialized) throw RoverNotInitializedException()
+        command.split("").forEach {
+            when (it) {
+                "M" -> currentRover.move()
+                "L" -> currentRover.turnLeft()
+                "R" -> currentRover.turnRight()
+            }
+        }
+    }
 }
 
 class SurfaceNotInitializedException : RuntimeException("Rover need a surface!")
+
+class RoverNotInitializedException : RuntimeException("We need rover to execute command on!")
