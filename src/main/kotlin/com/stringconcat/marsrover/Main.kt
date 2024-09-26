@@ -1,15 +1,11 @@
-import com.stringconcat.marsrover.Plateau
-import com.stringconcat.marsrover.Rover
+import com.stringconcat.marsrover.CommandExecutor
 
+// cli read было лениво делать, потом сделаю)
 fun main(args: Array<String>) {
-    val mars = Plateau(width = 20, height = 20)
-    val rover = Rover.northFaced(surface = mars)
-
-    rover.turnLeft()
-    rover.move()
-    rover.turnRight()
-
-    println(rover.coordinates)
-    println(rover.direction())
-
+    val executor = CommandExecutor()
+    executor.readCommand("5 5")
+    executor.readCommand("1 2 N")
+    executor.readCommand("LMLMLMLMM")
+    executor.readCommand("3 3 E")
+    executor.readCommand("MMRMMRMRRM")
 }

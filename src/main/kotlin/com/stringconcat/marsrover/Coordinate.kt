@@ -17,5 +17,7 @@ data class Coordinate internal constructor(
     fun incX() = Coordinate(x.inc(), y)
     fun decY() = Coordinate(x, y.dec())
     fun decX() = Coordinate(x.dec(), y)
+    
+    override fun toString() = "Coordinate(x=$x, y=$y)"
 }
 

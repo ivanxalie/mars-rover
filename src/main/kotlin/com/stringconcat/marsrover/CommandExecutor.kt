@@ -51,6 +51,7 @@ class CommandExecutor {
                 "R" -> currentRover.turnRight()
             }
         }
+        println("${currentRover.coordinates.x} ${currentRover.coordinates.y} ${currentRover.direction}")
     }
 }
 

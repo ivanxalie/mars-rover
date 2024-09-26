@@ -3,7 +3,7 @@ package com.stringconcat.marsrover
 class Rover internal constructor(
     var coordinates: Coordinate,
     var direction: Direction,
-    val surface: Surface
+    private val surface: Surface
 ) {
     init {
         surface.land(coordinates)
@@ -60,5 +60,23 @@ class Rover internal constructor(
         }
     }
 
-    fun direction() = direction
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Rover
+
+        if (coordinates != other.coordinates) return false
+        if (direction != other.direction) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = coordinates.hashCode()
+        result = 31 * result + direction.hashCode()
+        return result
+    }
+
+    override fun toString() = "Rover(coordinates=$coordinates, direction=$direction)"
 }

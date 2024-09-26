@@ -1,5 +1,6 @@
 package com.stringconcat.marsrover
 
+import com.stringconcat.marsrover.Direction.*
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -38,7 +39,7 @@ class CommandExecutorTest {
 
         surface shouldNotBe null
         rover shouldNotBe null
-        rover.direction shouldBe Direction.NORTH
+        rover.direction shouldBe NORTH
         surface.width() shouldBe 4
         surface.height() shouldBe 4
         surface.containsCoordinate(Coordinate(1, 2)) shouldBe true
@@ -58,7 +59,7 @@ class CommandExecutorTest {
         val rover = executor.currentRover
 
         rover shouldNotBe null
-        rover.direction shouldBe Direction.WEST
+        rover.direction shouldBe WEST
     }
 
     @Test
@@ -70,6 +71,28 @@ class CommandExecutorTest {
         val rover = executor.currentRover
 
         rover shouldNotBe null
-        rover.direction shouldBe Direction.NORTH
+        rover.direction shouldBe NORTH
+    }
+
+    @Test
+    fun `test full integration scenario`() {
+        executor.readCommand("5 5")
+        executor.readCommand("1 2 N")
+        executor.readCommand("LMLMLMLMM")
+
+        val firstRover = executor.currentRover
+
+        firstRover.coordinates shouldBe Coordinate(1, 3)
+        firstRover.direction shouldBe NORTH
+
+        executor.readCommand("3 3 E")
+        executor.readCommand("MMRMMRMRRM")
+
+        val secondRover = executor.currentRover
+
+        firstRover shouldNotBe secondRover
+
+        secondRover.coordinates shouldBe Coordinate(5, 1)
+        secondRover.direction shouldBe EAST
     }
 }
